@@ -5,12 +5,11 @@ description: Learn how to manage the media items of your media library
 
 import { Aside } from '@astrojs/starlight/components';
 
-
-Media items are the core of your media library. 
+Media items are the core of your media library.
 Each media item shows up on the search page and has its own details page.
 Use media items to describe your sermons, music, videos, and other media content.
-Each file in the `src/content/media` folder describes one media item. Every media item references 
-at least one content URL, eg. a MP3 file, a YouTube video or a PDF file.
+Each file in the `src/content/media` folder describes one media item. Every media item references
+at least one content URL, e.g., a MP3 file, a YouTube video, or a PDF file.
 
 Here is an example of a media item:
 
@@ -32,14 +31,21 @@ Here is an example of a media item:
 ```
 
 <Aside>
-By convention we name our files with the following pattern: `commonId--language.json`. This makes it easy to find the 
-media item for a specific language.
+  By convention we name our files with the following pattern:
+  `commonId--language.json`. This makes it easy to find the media item for a
+  specific language.
 </Aside>
 
 ## Reference
 
-A media item is a JSON file describing a media item. 
+A media item is a JSON file describing a media item.
 We recommend to fill as many properties as possible to provide a good user experience.
+
+![Annotated image](./images/media-items-example.png)
+
+The image above shows how the available properties' values are rendered on the
+media item's detail page.
+
 Here is a description of the available properties.
 
 ### commonId
@@ -48,7 +54,7 @@ type: `string` \
 example: `"sermon-1"` \
 required: `true`
 
-The `commonId` is a unique identifier for a media item. If your media item is available in multiple languages, 
+The `commonId` is a unique identifier for a media item. If your media item is available in multiple languages,
 you should create a media item for each language. In this case use the same `commonId` for all languages.
 LightNet uses the `commonId` to find translations of a media item.
 
@@ -88,7 +94,7 @@ required: `true`
 
 The path to the image file that should be used as a cover image for the media item. The image should be in the `src/content/media/images` folder.
 By convention we name our image files with the following pattern: `[commonId]--[language]`. If the image contains text, it should be in the language of the media item.
-Provided image formats include `jpg`, `png`, `webp`. The image is optimized for performance. 
+Provided image formats include `jpg`, `png`, `webp`. The image is optimized for performance.
 We recommend to use a image that is at least 1000px wide to ensure that it looks good on all devices.
 
 ### content
@@ -108,28 +114,29 @@ type: `string`\
 example: `"/files/sermon-1.mp3"` \
 required: `true`
 
-Each object has a `url` property that points to the content. 
+Each object has a `url` property that points to the content.
 If you want to make a file available for your media item, store it inside the `public/files` folder and reference it with the `url` property.
 For example if you have a pdf file `public/files/sermon-1.pdf` you can reference it with `url: "/files/sermon-1.pdf"`.
 
-<Aside type="tip">
-For a good user experience make sure to keep your files inside `public/files` as small as possible. They won't be further optimized
-for performance.
+<Aside type='tip'>
+  For a good user experience make sure to keep your files inside `public/files`
+  as small as possible. They won't be further optimized for performance.
 </Aside>
 
 These URL types are supported:
 
-| URL type  | Example                               |
-|-----------|---------------------------------------|
-| YouTube video  | `"https://www.youtube.com/watch?v=1234"`  |
-| Vimeo video   | `"https://vimeo.com/1234"`                     |
-| Internal file  | `"/files/sermon-1.pdf"` |
-| External file | `"https://cdn.example.com/sermon-1.mp3"`    |
-| External website | `"https://example.com/sermon-1"`    |
+| URL type         | Example                                  |
+| ---------------- | ---------------------------------------- |
+| YouTube video    | `"https://www.youtube.com/watch?v=1234"` |
+| Vimeo video      | `"https://vimeo.com/1234"`               |
+| Internal file    | `"/files/sermon-1.pdf"`                  |
+| External file    | `"https://cdn.example.com/sermon-1.mp3"` |
+| External website | `"https://example.com/sermon-1"`         |
 
-
-<Aside type="tip">
-Use the [media type](/content/media-types) to configure how the content should be displayed. For example if you have a video you can configure the video player to be used.
+<Aside type='tip'>
+  Use the [media type](/content/media-types) to configure how the content should
+  be displayed. For example if you have a video you can configure the video
+  player to be used.
 </Aside>
 
 #### content: label
@@ -142,18 +149,18 @@ The `label` property is optional and can be used to give a name to the content. 
 If no `label` property is provided the label is derived from the `url` property. For example if the `url` property is `"/files/sermon-1.pdf"` the label is `sermon-1`.
 If it is `"https://www.youtube.com/watch?v=1234"` the content label is `youtube.com`. You can also use a translation key for the label.
 
-
 ### dateCreated
 
 type: `string`\
 example: `"2022-01-01"` \
 required: `true`
 
-The date when the media item was created in this library. The date should be in the format `YYYY-MM-DD`. 
+The date when the media item was created in this library. The date should be in the format `YYYY-MM-DD`.
 This date is used to sort the media items from newest to oldest.
 
-<Aside type="note">
-The dateCreated is when the media item was added to your LightNet media library not when it was originally published.
+<Aside type='note'>
+  The dateCreated is when the media item was added to your LightNet media
+  library not when it was originally published.
 </Aside>
 
 ### description
@@ -173,14 +180,13 @@ required: `false`
 
 An array containing the names of the person(s)/organizations(s) that created the media item.
 
-
 ### categories
 
 type: `string[]`\
 example: `["sermons"]` \
 required: `false`
 
-An array containing the identifiers of the categories this media item belongs to. The category ids should match files 
+An array containing the identifiers of the categories this media item belongs to. The category ids should match files
 in the `src/content/categories` folder. For example if you have a file `src/content/categories/sermons.json` you can set the the `categories` property to `["sermons"]`.
 
 ### collections
@@ -198,7 +204,7 @@ type: `string`\
 example: `"sermon-series"` \
 required: `true`
 
-Identifier of the collections this media item belongs to. It must match a collection definition inside 
+Identifier of the collections this media item belongs to. It must match a collection definition inside
 the `src/content/media-collections` folder. For example if you have a file `src/content/media-collections/sermon-series.json` you can set the the `collections` property to `"sermon-series"`.
 
 #### collections: index
@@ -207,7 +213,6 @@ type: `number`\
 example: `1` \
 required: `false`
 
-The index of the media item in the collection. The index is used to sort the media items in the collection. 
+The index of the media item in the collection. The index is used to sort the media items in the collection.
 Entries with a lower index are sorted first. Entries without index are sorted after the entries with an index.
 Entries with the same index are sorted by their identifier.
-
